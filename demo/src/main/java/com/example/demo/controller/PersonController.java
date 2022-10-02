@@ -48,6 +48,21 @@ public class PersonController {
         return "redirect:/";
     }
 
+    @GetMapping("edit/{id}")
+    public String edit(@PathVariable long id, Model model) {
+        model.addAttribute("person", repository.findById(id)); //一覧データの用意
+        return "person/edit";
+    }
+
+    @PostMapping("/update/{id}")
+    public String update(@PathVariable long id, @Validated @ModelAttribute Person person, BindingResult result) {
+        if (result.hasErrors()) {
+            return "person/edit";
+        }
+        repository.save(person);
+        return "redirect:/";
+    }
+
     //初期データの投入
     @PostConstruct
     public void dataInit(){
