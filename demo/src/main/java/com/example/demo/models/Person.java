@@ -1,5 +1,8 @@
 package com.example.demo.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;	
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Max;
@@ -11,8 +14,12 @@ import lombok.Getter;
 import lombok.Setter;
 @Getter
 @Setter
-
+@Entity
 public class Person {
+    @Id
+    @GeneratedValue
+    private Long id;
+
     @NotBlank
     @Size(max = 120)
     private String name;
